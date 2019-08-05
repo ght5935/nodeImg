@@ -27,6 +27,9 @@ node demo.js
 六、查看下载图片
 图片存在项目的相对路径assets的文件夹
 
+七、预览图
+![预览图](https://raw.githubusercontent.com/ght5935/nodeImg/master/assets/1.png)
+
 注：为了可以下载更多的图片，可以手动更改demo.js中 page 的值，然后重启服务（第四步）
 
 <br/>
