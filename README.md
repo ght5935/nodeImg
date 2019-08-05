@@ -18,11 +18,11 @@ node eg.js
 
 四、本地页面预览
 node demo.js
-根据提示在浏览器输入:localhost:8081
+根据提示在浏览器输入localhost:8081
 
 五、本地json数据预览
 在第四步的基础上
-根据提示在浏览器输入:localhost:8081/index
+根据提示在浏览器输入localhost:8081/index
 
 六、查看下载图片
 图片存在项目的相对路径assets的文件夹
