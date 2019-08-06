@@ -17,7 +17,7 @@ node eg.js
 所下载的图片请在assets文件夹查看
 
 四、本地页面预览
-node demo.js
+node index.js
 根据提示在浏览器输入:localhost:8081
 
 五、本地json数据预览
@@ -30,7 +30,7 @@ node demo.js
 七、预览图
 ![预览图](https://raw.githubusercontent.com/ght5935/nodeImg/master/assets/1.png)
 
-注：为了可以下载更多的图片，可以手动更改demo.js中 page 的值，然后重启服务（第四步）
+注：为了可以下载更多的图片，可以手动更改index.js中 page 的值，然后重启服务（第四步）
 
 <br/>
 /index返回取到json

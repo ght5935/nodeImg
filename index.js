@@ -2,7 +2,7 @@ var superagent = require('superagent');
 var charset = require('superagent-charset');
 charset(superagent);
 var express = require('express');
-var baseUrl = 'https://www.qqtn.com/'; //输入任何网址都可以
+var baseUrl = 'https://www.qqtn.com/';
 const cheerio = require('cheerio');
 var request = require("request");
 var fs = require('fs')
@@ -26,7 +26,6 @@ app.get('/index', function (req, res) {
     page = page || '1';
     var route = `tx/${type}tx_${page}.html`
     //网页页面信息是gb2312，所以chaeset应该为.charset('gb2312')，一般网页则为utf-8,可以直接使用.charset('utf-8')
-    console.log(baseUrl + route)
     superagent.get(baseUrl + route)
         .charset('gb2312')
         .end(function (err, sres) {
@@ -105,6 +104,7 @@ app.get('/index', function (req, res) {
                         data.map((v, i) => {
                             v.items.map((v,i) => {
                                 i = request(v.thumbSrc)
+                                // 后缀.jpg可用正则匹配
                                 i.pipe(fs.createWriteStream('./assets/' + v.title + '.jpg'));
                             })
     
@@ -124,10 +124,6 @@ app.get('/show', (req, res) => {
     })
 })
 var server = app.listen(8081, function () {
-
     var host = server.address().address
     var port = server.address().port
-
-    console.log("应用实例，访问地址为 http://%s:%s", host, port)
-
 })
