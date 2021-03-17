@@ -27,6 +27,7 @@ app.get('/index', function (req, res) {
     var route = `tx/${type}tx_${page}.html`
     //网页页面信息是gb2312，所以chaeset应该为.charset('gb2312')，一般网页则为utf-8,可以直接使用.charset('utf-8')
     superagent.get(baseUrl + route)
+        .buffer(false)
         .charset('gb2312')
         .end(function (err, sres) {
             var items = [];
@@ -35,7 +36,7 @@ app.get('/index', function (req, res) {
                 res.json({ code: 400, msg: err, sets: items });
                 return;
             }
-            var $ = cheerio.load(sres.text);
+            var $ = cheerio.load(sres.text || 'https://www.qqtn.com/tx/weixintx_1.html'); // sres.text 不能为null
             $('div.g-main-bg ul.g-gxlist-imgbox li a').each(function (idx, element) {
                 var $element = $(element);
                 var $subElement = $element.find('img');
@@ -99,19 +100,19 @@ app.get('/index', function (req, res) {
                 fs.readFile(path.join(__dirname, '/img.json'), (err, data) => {
                     if (err) {
                         return false
-                    }else{
+                    } else {
                         data = JSON.parse(data.toString());
                         data.map((v, i) => {
-                            v.items.map((v,i) => {
+                            v.items.map((v, i) => {
                                 i = request(v.thumbSrc)
                                 // 后缀.jpg可用正则匹配
                                 i.pipe(fs.createWriteStream('./assets/' + v.title + '.jpg'));
                             })
-    
+
                         })
                     }
                 })
-            } catch(err){}
+            } catch (err) { }
         })
 });
 app.get('/show', (req, res) => {
